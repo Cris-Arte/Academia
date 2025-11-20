@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/material_dynamic_neutral80">
+
+    <EditText
+        android:id="@+id/etTelefone"
+        android:layout_width="275dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/black"
+        android:ems="10"
+        android:inputType="text"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.312"
+        app:layout_constraintStart_toEndOf="@+id/tvTelefone"
+        app:layout_constraintTop_toBottomOf="@+id/etNome" />
+
+    <EditText
+        android:id="@+id/etNome"
+        android:layout_width="282dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/black"
+        android:ems="10"
+        android:inputType="text"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.818"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvNome"
+        android:layout_width="84dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="156dp"
+        android:text="@string/nome"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/etNome"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTelefone"
+        android:layout_width="84dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="60dp"
+        android:text="@string/telefone"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNome" />
+
+    <RadioGroup
+        android:id="@+id/rgPlanos"
+        android:layout_width="303dp"
+        android:layout_height="205dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etTelefone">
+
+        <RadioButton
+            android:id="@+id/rbMensal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/plano1"
+            android:textAlignment="textStart"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/rbBimestral"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/plano2"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/rbTrimestral"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/plano3"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/rbAnual"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/plano4"
+            android:textSize="20sp" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btEnviar"
+        android:layout_width="296dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#282E31"
+        android:fontFamily="sans-serif"
+        android:text="@string/enviar"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rgPlanos" />
+
+    <TextView
+        android:id="@+id/tvBoasVindas"
+        android:layout_width="444dp"
+        android:layout_height="95dp"
+        android:layout_marginTop="10dp"
+        android:background="#282E31"
+        android:fontFamily="@font/adlam_display"
+        android:paddingTop="25dp"
+        android:text="@string/boasVindas"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:barrierMargin="@dimen/cardview_compat_inset_shadow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.400"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btVoltar"
+        android:layout_width="296dp"
+        android:layout_height="57dp"
+        android:backgroundTint="#282E31"
+        android:fontFamily="sans-serif"
+        android:text="@string/voltar"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btEnviar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

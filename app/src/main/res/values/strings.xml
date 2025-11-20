@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Academia</string>
+    <string name="aulas">Conheça nossas aulas</string>
+    <string name="cadastro">Faça seu cadastro</string>
+    <string name="pilates">Pilates</string>
+    <string name="luta">Muay Thai</string>
+    <string name="treino">Treinos</string>
+    <string name="nome">Nome:</string>
+    <string name="telefone">Telefone:</string>
+
+    <string name="plano1">Mensal:    1 x R$120</string>
+    <string name="plano2">Bimestral: 2 x R$110</string>
+    <string name="plano3">Semestral: 6 x R$100</string>
+    <string name="plano4">Anual:    12 x R$90</string>
+    <string name="funcionarios">Funcionários</string>
+    <string name="visualizar">Visualizar Cadastros</string>
+    <string name="boasVindas">Faça seu cadastro abaixo:</string>
+    <string name="enviar">Enviar</string>
+    <string name="excluir">Excluir</string>
+    <string name="voltar">Voltar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="acessar">Acessar</string>
+    <string name="senhaAcesso">Digite a senha de acesso:</string>
+    <string name="acessoRestrito">Acesso restrito</string>
+    <string name="comentarioPilates">
+        Transforme Sua Qualidade de Vida\n com Pilates!\n
+        Agende sua aula experimental!\n
+        Invista em você hoje mesmo!</string>
+    <string name="comentarioLuta">
+        Transforme seu corpo e mente!\n
+        Aulas de Muay Thai vão te dar\n condicionamento, força e confiança.\n
+        Descubra a coragem que existe em você!</string>
+    <string name="cadastroPilates">Faça seu Cadastro</string>
+
+
+</resources>
