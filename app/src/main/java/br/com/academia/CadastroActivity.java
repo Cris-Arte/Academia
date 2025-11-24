@@ -1,9 +1,6 @@
 package br.com.academia;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,8 +11,6 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import br.com.academia.AssistenteDB;
 
 public class CadastroActivity extends AppCompatActivity {
     private EditText etNome;
@@ -56,13 +51,12 @@ public class CadastroActivity extends AppCompatActivity {
                 String nome = etNome.getText().toString().trim();
                 String telefone = etTelefone.getText().toString().trim();
 
-                // Validar campos
                 if (nome.isEmpty()) {
                     etNome.setError("Digite o nome");
                     return;
                 }
 
-                if (telefone.isEmpty() || telefone.length() < 14 || telefone.length() > 15) {
+                if (telefone.isEmpty() || telefone.length() < 11 || telefone.length() > 15) {
                     etTelefone.setError("Digite um telefone válido");
                     return;
                 }
@@ -72,15 +66,10 @@ public class CadastroActivity extends AppCompatActivity {
                     return;
                 }
 
-                AssistenteDB assistente = new AssistenteDB(CadastroActivity.this);
-                long id = assistente.adicionarCliente(nome, telefone, planoSelecionado);
-
-                if (id != -1) {
-                    Toast.makeText(CadastroActivity.this, "Cadastro enviado com sucesso! ID: " + id, Toast.LENGTH_LONG).show();
-                    limparCampos();
-                } else {
-                    Toast.makeText(CadastroActivity.this, "Erro ao salvar cadastro", Toast.LENGTH_SHORT).show();
-                }
+                CriarBancoDados banco = new CriarBancoDados(CadastroActivity.this);
+                banco.adicionarCliente(nome, telefone, planoSelecionado);
+                Toast.makeText(CadastroActivity.this, "Cadastro enviado com sucesso!", Toast.LENGTH_LONG).show();
+                limparCampos();
             }
         });
 

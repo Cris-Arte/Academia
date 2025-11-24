@@ -19,7 +19,6 @@ import java.util.List;
 public class FuncionariosActivity extends AppCompatActivity {
     private Button btVisualizar, btExcluir, btVoltarFunc;
     private ListView lvVisualizar;
-
     private List<Integer> idsClientes = new ArrayList<>();
     private int clienteSelecionado = -1;
 
@@ -52,17 +51,29 @@ public class FuncionariosActivity extends AppCompatActivity {
         btExcluir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (clienteSelecionado != -1){
-                    excluirCliente();
+                if (clienteSelecionado == -1) {
+                    Toast.makeText(FuncionariosActivity.this,
+                            "Selecione um cliente primeiro",
+                            Toast.LENGTH_SHORT).show();
+                    return;
                 }
+
+                int idCliente = idsClientes.get(clienteSelecionado);
+
+                CriarBancoDados banco = new CriarBancoDados(FuncionariosActivity.this);
+                banco.excluirCliente(idCliente);
+                Toast.makeText(FuncionariosActivity.this,
+                        "Cliente excluído com sucesso!",
+                        Toast.LENGTH_SHORT).show();
+                carregarClientes();
             }
         });
         btVoltarFunc.setOnClickListener(v -> startActivity(new Intent(FuncionariosActivity.this, MainActivity.class)));
     }
 
     private void carregarClientes() {
-        AssistenteDB assistente = new AssistenteDB(this);
-        Cursor cursor = assistente.getAllClientes();
+        CriarBancoDados banco = new CriarBancoDados(this);
+        Cursor cursor = banco.getAllClientes();
 
         List<String> clientes = new ArrayList<>();
         idsClientes.clear();
@@ -88,19 +99,5 @@ public class FuncionariosActivity extends AppCompatActivity {
         lvVisualizar.setAdapter(adapter);
     }
 
-    private void excluirCliente() {
-        if (clienteSelecionado != -1 && clienteSelecionado < idsClientes.size()) {
-            int idCliente = idsClientes.get(clienteSelecionado);
 
-            AssistenteDB assistente = new AssistenteDB(this);
-            int resultado = assistente.excluirCliente(idCliente);
-
-            if (resultado > 0) {
-                Toast.makeText(this, "Cliente excluído com sucesso!", Toast.LENGTH_SHORT).show();
-                carregarClientes(); // Recarregar lista
-            } else {
-                Toast.makeText(this, "Erro ao excluir cliente", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 }

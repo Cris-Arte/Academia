@@ -6,8 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class AssistenteDB extends SQLiteOpenHelper {
-    public AssistenteDB(Context context) {
+public class CriarBancoDados extends SQLiteOpenHelper {
+    public CriarBancoDados(Context context) {
         super(context, "academia.db", null, 1);
     }
     @Override
@@ -69,11 +69,10 @@ public class AssistenteDB extends SQLiteOpenHelper {
     }
 
     // DELETE - Excluir cliente
-    public int excluirCliente(int id) {
+    public void excluirCliente(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-
-        // DELETE do SQL como metodo pronto
-        return db.delete("clientes", "id = ?", new String[]{String.valueOf(id)});
+        db.delete("clientes", "id = " + id, null);
+        db.close();
     }
 
 }
