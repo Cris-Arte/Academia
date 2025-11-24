@@ -29,10 +29,8 @@ public class MainActivity extends AppCompatActivity {
         //Quando clica no botão Funcionarios na tela principal
         //Cria um novo objeto SenhaDialog e mostra o dialog na tela
         btFuncionarios = findViewById(R.id.btVisualizar);
-        btFuncionarios.setOnClickListener(v -> {
-            SenhaDialog senhaDialog = new SenhaDialog(MainActivity.this);
-            senhaDialog.show();
-        });
-
+        btFuncionarios.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, FuncionariosActivity.class))
+        );
     }
 }

@@ -43,9 +43,9 @@ public class FuncionariosActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 clienteSelecionado = position;
-                String nomeCliente = ((ArrayAdapter<String>)parent.getAdapter()).getItem(position);
-                Toast.makeText(FuncionariosActivity.this,
-                        "Selecionado: " + nomeCliente.split(" - ")[0], Toast.LENGTH_SHORT).show();
+                int idCliente = idsClientes.get(clienteSelecionado);
+                Toast.makeText(FuncionariosActivity.this, "Cliente Selecionado: " + idCliente,
+                         Toast.LENGTH_SHORT).show();
             }
         });
         btExcluir.setOnClickListener(new View.OnClickListener() {
@@ -57,9 +57,7 @@ public class FuncionariosActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 int idCliente = idsClientes.get(clienteSelecionado);
-
                 CriarBancoDados banco = new CriarBancoDados(FuncionariosActivity.this);
                 banco.excluirCliente(idCliente);
                 Toast.makeText(FuncionariosActivity.this,
@@ -71,15 +69,15 @@ public class FuncionariosActivity extends AppCompatActivity {
         btVoltarFunc.setOnClickListener(v -> startActivity(new Intent(FuncionariosActivity.this, MainActivity.class)));
     }
 
-    private void carregarClientes() {
+    private void carregarClientes(){
         CriarBancoDados banco = new CriarBancoDados(this);
         Cursor cursor = banco.getAllClientes();
 
         List<String> clientes = new ArrayList<>();
         idsClientes.clear();
-        clienteSelecionado = -1; // Resetar seleção
+        clienteSelecionado = -1;
 
-        if (cursor.moveToFirst()) {
+        if (cursor.moveToFirst()){
             do {
                 int id = cursor.getInt(0);
                 String nome = cursor.getString(1);
