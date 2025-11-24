@@ -37,8 +37,6 @@ public class CadastroActivity extends AppCompatActivity {
         btEnviar = findViewById(R.id.btEnviar);
         btVoltar = findViewById(R.id.btVoltar);
 
-        formatarTelefone();
-
         rgPlanos.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(@NonNull RadioGroup group, int checkedId) {
@@ -74,50 +72,19 @@ public class CadastroActivity extends AppCompatActivity {
                     return;
                 }
 
-                try {
-                    AssistenteDB assistente = new AssistenteDB(CadastroActivity.this);
-                    long id = assistente.adicionarCliente(nome, telefone, planoSelecionado);
+                AssistenteDB assistente = new AssistenteDB(CadastroActivity.this);
+                long id = assistente.adicionarCliente(nome, telefone, planoSelecionado);
 
-                    if (id != -1) {
-                        Toast.makeText(CadastroActivity.this, "Cadastro enviado com sucesso! ID: " + id, Toast.LENGTH_LONG).show();
-                        limparCampos();
-                    } else {
-                        Toast.makeText(CadastroActivity.this, "Erro ao salvar cadastro", Toast.LENGTH_SHORT).show();
-                    }
+                if (id != -1) {
+                    Toast.makeText(CadastroActivity.this, "Cadastro enviado com sucesso! ID: " + id, Toast.LENGTH_LONG).show();
+                    limparCampos();
+                } else {
+                    Toast.makeText(CadastroActivity.this, "Erro ao salvar cadastro", Toast.LENGTH_SHORT).show();
                 }
-
-                catch (Exception e) {Toast.makeText(CadastroActivity.this, "Erro: " + e.getMessage(), Toast.LENGTH_SHORT).show();}
             }
         });
 
         btVoltar.setOnClickListener(v -> finish());
-    }
-    private void formatarTelefone() {
-        etTelefone.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String text = s.toString();
-
-                // Se tem 2 números, adiciona "() "
-                if (text.length() == 2 && !text.contains("(")) {
-                    etTelefone.setText("(" + text + ") ");
-                    etTelefone.setSelection(5); // Posiciona cursor após ") "
-                }
-
-                // Se tem 10 números, adiciona "-"
-                if (text.length() == 10 && !text.contains("-")) {
-                    String parte1 = text.substring(0, 9);
-                    String parte2 = text.substring(9);
-                    etTelefone.setText(parte1 + "-" + parte2);
-                }
-            }
-        });
     }
     private void limparCampos() {
         etNome.setText("");

@@ -26,7 +26,7 @@ public class PilatesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_luta);
+        setContentView(R.layout.activity_pilates);
 
         btProximo = findViewById(R.id.btProximo);
         btAnterior = findViewById(R.id.btAnterior);

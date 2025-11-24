@@ -32,7 +32,8 @@ public class AssistenteDB extends SQLiteOpenHelper {
     // CREATE - Criar cliente
     public long adicionarCliente(String nome, String telefone, String plano) {
         SQLiteDatabase db = this.getWritableDatabase();
-        //ContentValues e uma classe que transporta dados para o banco
+        //ContentValues e uma classe cria um novo pacote de valores chamado 'dados'
+        // e colocar nele: nome, telefone e plano e transporta dados para o banco
         ContentValues values = new ContentValues();
         values.put("nome", nome);
         values.put("telefone", telefone);
