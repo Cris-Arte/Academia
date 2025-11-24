@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CriarBancoDados extends SQLiteOpenHelper {
     public CriarBancoDados(Context context) {
         super(context, "academia.db", null, 1);
@@ -25,37 +28,46 @@ public class CriarBancoDados extends SQLiteOpenHelper {
         onCreate(db);
     }
     // CREATE - Criar cliente
-    public long adicionarCliente(String nome, String telefone, String plano) {
+    public long adicionarCliente(Cliente cliente) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("nome", nome);
-        values.put("telefone", telefone);
-        values.put("plano", plano);
+        values.put("nome", cliente.getNome());
+        values.put("telefone", cliente.getTelefone());
+        values.put("plano", cliente.getPlano());
         long id = db.insert("clientes", null, values);
         db.close();
         return id;
     }
     // READ - Buscar todos os clientes
-    public Cursor getAllClientes() {
+    public List<Cliente> getAllClientesAsObjects(){
+        List<Cliente> clientes = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.query("clientes", null, null, null, null, null, "nome ASC");
-    }
+        Cursor cursor = db.query("clientes", null, null, null, null, null, "nome ASC");
 
-    // READ - Buscar cliente por ID
-    public Cursor getClienteById(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        return db.query("clientes", null, "id = ?", new String[]{String.valueOf(id)}, null, null, null);
+        if (cursor.moveToFirst()){
+            do{
+                Cliente cliente = new Cliente(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3)
+                );
+                clientes.add(cliente);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return clientes;
     }
 
     // UPDATE - Atualizar cliente
-    public int atualizarCliente(int id, String nome, String telefone, String plano) {
+    public int atualizarCliente(Cliente cliente) {
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
-        values.put("nome", nome);
-        values.put("telefone", telefone);
-        values.put("plano", plano);
-        return db.update("clientes", values, "id = ?", new String[]{String.valueOf(id)});
+        values.put("nome", cliente.getNome());
+        values.put("telefone", cliente.getTelefone());
+        values.put("plano", cliente.getPlano());
+        return db.update("clientes", values, "id = ?",
+                new String[]{String.valueOf(cliente.getId())});
     }
 
     // DELETE - Excluir cliente

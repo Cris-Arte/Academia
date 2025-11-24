@@ -34,14 +34,10 @@ public class CadastroActivity extends AppCompatActivity {
 
         rgPlanos.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(@NonNull RadioGroup group, int checkedId) {
-                // group: é o próprio RadioGroup (rgPlanos)
-                // checkedId: é o ID do RadioButton que foi selecionado
+            public void onCheckedChanged(@NonNull RadioGroup group, int btSelecionadoId) {
 
-                RadioButton radioSelecionado = findViewById(checkedId);
+                RadioButton radioSelecionado = findViewById(btSelecionadoId);
                 planoSelecionado = radioSelecionado.getText().toString();
-
-                System.out.println("Usuário selecionou: " + planoSelecionado);
             }
         });
 
@@ -65,9 +61,9 @@ public class CadastroActivity extends AppCompatActivity {
                     Toast.makeText(CadastroActivity.this, "Selecione um plano", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                Cliente novoCliente = new Cliente(nome, telefone, planoSelecionado);
                 CriarBancoDados banco = new CriarBancoDados(CadastroActivity.this);
-                banco.adicionarCliente(nome, telefone, planoSelecionado);
+                banco.adicionarCliente(novoCliente);
                 Toast.makeText(CadastroActivity.this, "Cadastro enviado com sucesso!", Toast.LENGTH_LONG).show();
                 limparCampos();
             }

@@ -71,29 +71,22 @@ public class FuncionariosActivity extends AppCompatActivity {
 
     private void carregarClientes(){
         CriarBancoDados banco = new CriarBancoDados(this);
-        Cursor cursor = banco.getAllClientes();
+        List<Cliente> clientes = banco.getAllClientesAsObjects();
 
-        List<String> clientes = new ArrayList<>();
+        List<String> clientesFormatados = new ArrayList<>();
         idsClientes.clear();
         clienteSelecionado = -1;
 
-        if (cursor.moveToFirst()){
-            do {
-                int id = cursor.getInt(0);
-                String nome = cursor.getString(1);
-                String telefone = cursor.getString(2);
-                String plano = cursor.getString(3);
-
-                String clienteFormatado = nome + " - " + plano + " - " + telefone;
-                clientes.add(clienteFormatado);
-                idsClientes.add(id);
-
-            } while (cursor.moveToNext());
+        for (Cliente cliente : clientes){
+            String clienteFormatado = cliente.getNome() + " - " +
+                                      cliente.getPlano() + " - " +
+                                      cliente.getTelefone();
+            clientesFormatados.add(clienteFormatado);
+            idsClientes.add(cliente.getId());
         }
-        cursor.close();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, clientes);
+                android.R.layout.simple_list_item_1, clientesFormatados);
         lvVisualizar.setAdapter(adapter);
     }
 
